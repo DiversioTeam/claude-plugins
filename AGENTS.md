@@ -69,6 +69,11 @@ When working in this repo, Claude Code should:
      - Core priorities / taste.
      - Output shape and severity tags.
    - Avoid including secrets or customer‑specific confidential details in SKILL docs.
+   - For every Skill, add at least one corresponding **plugin slash command**
+     under `plugins/<plugin>/commands/*.md` that invokes the Skill (thin
+     wrapper that references the Skill by name). This ensures the plugin
+     appears as a `/plugin-name:command` entry in Claude Code’s slash command
+     palette.
 
 4. **Follow existing naming and structure.**
    - New plugins should mirror the structure of `monty-code-review`:

@@ -16,21 +16,27 @@ claude-plugins/
 │   ├── monty-code-review/             # Monty backend code review plugin
 │   │   ├── .claude-plugin/
 │   │   │   └── plugin.json            # Plugin manifest
-│   │   └── skills/
-│   │       └── monty-code-review/
-│   │           └── SKILL.md           # Skill definition
+│   │   ├── skills/
+│   │   │   └── monty-code-review/
+│   │   │       └── SKILL.md           # Skill definition
+│   │   └── commands/
+│   │       └── code-review.md         # Slash command entrypoint
 │   ├── backend-pr-workflow/           # Backend PR workflow plugin
 │   │   ├── .claude-plugin/
 │   │   │   └── plugin.json
-│   │   └── skills/
-│   │       └── backend-pr-workflow/
-│   │           └── SKILL.md
+│   │   ├── skills/
+│   │   │   └── backend-pr-workflow/
+│   │   │       └── SKILL.md
+│   │   └── commands/
+│   │       └── check-pr.md            # Slash command entrypoint
 │   └── code-review-digest-writer/     # Code review digest generator
 │       ├── .claude-plugin/
 │       │   └── plugin.json
-│       └── skills/
-│           └── code-review-digest-writer/
-│               └── SKILL.md
+│       ├── skills/
+│       │   └── code-review-digest-writer/
+│       │       └── SKILL.md
+│       └── commands/
+│           └── review-digest.md       # Slash command entrypoint
 ├── README.md
 └── LICENSE
 ```
@@ -62,6 +68,14 @@ claude-plugins/
 
    # Code review digest writer
    /plugin install code-review-digest-writer@diversiotech
+   ```
+
+3. Use plugin-provided slash commands (once plugins are installed):
+
+   ```text
+   /monty-code-review:code-review          # Hyper-pedantic backend code review
+   /backend-pr-workflow:check-pr           # Backend PR workflow & migrations check
+   /code-review-digest-writer:review-digest  # Generate a code review digest
    ```
 
 ## Documentation
