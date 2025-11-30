@@ -257,3 +257,35 @@ When commenting on code, pay particular attention to:
     avoid `float` unless there is a documented, compelling reason.
   - Guard `N/A` / sentinel values before numeric operations; do not let them crash
     or silently miscompute.
+
+## Examples
+
+### Example 1 – Full pedantic review
+
+- **Preferred user prompt (explicit skill)**:  
+  “Use your `monty-code-review` skill to review this Django PR like Monty would, and be fully pedantic with your usual severity tags.”
+- **Also treat as this skill (shorthand prompt)**:  
+  “Review this Django PR like Monty would! ultrathink”
+- When you see either of these (or similar wording clearly asking for a Monty-style backend review), assume the user wants this skill and follow the instructions in this file.
+- **Expected output shape** (sketch):  
+  - Short intro paragraph summarizing the change and what you focused on.  
+  - `What’s great` with 3–7 bullets, e.g.:  
+    - `survey/models.py – nice use of transaction.atomic around export generation.`  
+  - `What could be improved` with bullets like:  
+    - `[BLOCKING] dashboardapp/views/v2/report.py:L120–L145 – queryset is missing organization scoping; this risks cross-tenant leakage. Add an explicit filter on organization and a test covering mixed-tenant data.`  
+    - `[SHOULD_FIX] pulse_iq/tasks.py:L60–L80 – potential N+1 when iterating over responses. Consider prefetching related objects or batching queries.`  
+    - `[NIT] utils/date_helpers.py:L30 – docstring could clarify how “current quarter” is defined; also missing newline at EOF.`  
+  - `Tests` section calling out what’s covered and what’s missing.  
+  - `Verdict` section, e.g. “Request changes due to blocking multi-tenant and test coverage issues.”
+
+### Example 2 – Quick / non-pedantic pass
+
+- **Preferred user prompt (explicit skill)**:  
+  “Use your `monty-code-review` skill to skim this PR and only flag blocking or should-fix issues; skip most nits.”
+- **Also acceptable shorthand**:  
+  “Review this Django PR like Monty would, but only call out blocking or should-fix issues; skip the tiny nits.”
+- **Expected behavior**:  
+  - Follow the same workflow and priorities, but:  
+    - Only emit `[BLOCKING]` and `[SHOULD_FIX]` items unless a nit is truly important to mention.  
+    - In the intro or verdict, state that you intentionally suppressed most `[NIT]` items due to the requested lighter review.  
+  - The structure (`What’s great`, `What could be improved`, `Tests`, `Verdict`) stays the same; the difference is primarily in strictness and number of nits.
