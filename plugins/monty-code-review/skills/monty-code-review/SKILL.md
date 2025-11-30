@@ -20,7 +20,8 @@ allowed-tools:
 - Reviewing backend Django changes in this repository (especially core apps like
   `dashboardapp/`, `survey/`, `optimo_*`, `pulse_iq/`, `utils/`).
 - Reviewing Optimo- or survey-related code that touches multi-tenant data,
-  time dimensions, or exports.
+  time dimensions, exports, **or Django migrations / schema changes** where
+  downtime-safety matters.
 - Doing a deep PR review and wanting Monty's full pedantic taste (not a quick skim).
 - Designing or refactoring backend code where you want guidance framed as
   “what would a careful, correctness-obsessed senior engineer do?”
@@ -162,6 +163,9 @@ Use these tags consistently:
 - `[BLOCKING]`
   - Multi-tenant boundary violations (wrong org/company filter, missing `organization=…`).
   - Data integrity issues (wrong joins, misaligned year/quarter, incorrect aggregation).
+  - Unsafe migrations or downtime-risky schema changes (destructive changes in the
+    same deploy as dependent code; large-table defaults that will lock or rewrite
+    the table).
   - Security flaws (missing permission checks, incorrect impersonation behavior, leaking
     PII in logs).
   - Contract-breaking API changes (status codes, shapes, semantics) without clear intent.
@@ -228,6 +232,31 @@ When scanning a file or function, run through these lenses:
    - Are there tests covering new behavior, edge cases, and regression paths?
    - Do tests use factories/fixtures rather than hand-rolled graphs where possible?
    - Do tests reflect multi-tenant and time-dimension scenarios where relevant?
+
+9. Migrations & schema changes
+   - Does the PR include Django model or migration changes? If so:
+     - Avoid destructive changes (dropping fields/tables) in the same deploy where
+       running code still expects those fields; prefer a two-step rollout:
+       first remove usage in code, then drop the field/table in a follow-up PR once
+       no code depends on it.
+     - For large tables, avoid adding non-nullable columns with defaults in a single
+       migration that will rewrite or lock the whole table; instead:
+       - Add the column nullable with no default.
+       - Backfill values in controlled batches (often via non-atomic migrations or
+         background jobs).
+       - Only then, if needed, add a default for new rows.
+     - Treat volatile defaults (e.g. UUIDs, timestamps) similarly: add nullable
+       column first, backfill in batches, and then set defaults for new rows only.
+     - When a single feature has many iterative migrations in one PR, expect the
+       author to **regenerate a minimal, final migration set and re-apply it**
+       before merge, without touching migrations that are already on production
+       branches. Conceptually this means:
+       - Identify which migrations were introduced by this PR vs. which already
+         exist on the main branch.
+       - Migrate back to the last migration **before** the first PR-specific one.
+       - Delete only the PR-specific migration files.
+       - Regenerate migrations to represent the final schema state.
+       - Apply the regenerated migrations locally and ensure tests still pass.
 
 ## Strictness & Pedantry Defaults
 

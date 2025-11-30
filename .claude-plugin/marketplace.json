@@ -22,13 +22,24 @@
     {
       "name": "monty-code-review",
       "description": "Hyper-pedantic Django4Lyfe backend code review Skill (Monty's taste).",
-      "version": "1.0.2",
+      "version": "1.1.1",
       "author": {
         "name": "Diversio Devs"
       },
       "source": "./plugins/monty-code-review",
       "category": "code-analysis",
       "keywords": ["django", "backend", "code-review", "optimo", "diversio"]
+    },
+    {
+      "name": "backend-pr-workflow",
+      "description": "Enforces Diversio backend ClickUp-linked PR workflow, branch naming, safe Django migrations, and downtime-safe schema changes.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Diversio Devs"
+      },
+      "source": "./plugins/backend-pr-workflow",
+      "category": "process",
+      "keywords": ["django", "backend", "workflow", "clickup", "migrations", "diversio"]
     }
   ]
 }

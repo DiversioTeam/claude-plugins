@@ -39,6 +39,14 @@ When working in this repo, Claude Code should:
    - Prefer small, targeted edits over whole‑file rewrites.
    - If making non‑trivial changes, mentally (or programmatically) validate JSON.
 
+   - **Versioning:** When you add or change a plugin, always bump its version:
+     - Update `plugins/<plugin>/.claude-plugin/plugin.json` with a new version
+       (use simple SemVer-style increments, e.g. `0.1.0` → `0.1.1`).
+     - Ensure the corresponding entry in `.claude-plugin/marketplace.json` uses
+       the **same** version string.
+     - For new plugins, start at `0.1.0` (or similar) and add a matching entry
+       in `marketplace.json`.
+
 3. **Keep Skills self‑contained and documented.**
    - Each Skill should live at `plugins/<plugin-name>/skills/<skill-name>/SKILL.md`.
    - SKILL docs should explain:
