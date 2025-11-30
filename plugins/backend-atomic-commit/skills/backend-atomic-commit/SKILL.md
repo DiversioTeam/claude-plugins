@@ -32,6 +32,31 @@ backend) when you want:
   - Propose a strict, ticket-prefixed commit message **without** any Claude or
     AI signatures.
 
+## Example Prompts
+
+- “Run `/backend-atomic-commit:pre-commit` on this repo and actively fix all
+  files in `git status` so they obey backend `AGENTS.md`, `.pre-commit-config.yaml`,
+  `.security/*` helpers, and Monty’s taste (no local imports, strong typing,
+  structured logging). Then summarize what you changed and what’s still
+  `[BLOCKING]`.”
+- “Use `/backend-atomic-commit:atomic-commit` to prepare an atomic commit for
+  the staged changes in `backend/`. Enforce all pre-commit hooks and
+  `.security` scripts, run Ruff, mypy, Django checks, and relevant pytest
+  subsets, then propose a ticket-prefixed commit message with **no AI
+  signature** and clearly mark any `[BLOCKING]` issues.”
+- “Treat my current backend changes as one logical bugfix and run
+  `/backend-atomic-commit:pre-commit` in a strict mode: eliminate local
+  imports, fix type hints (no `Any`, no string-based annotations), clean up
+  debug statements, and ensure Ruff, `.security/local_imports_pr_diff.sh`,
+  mypy, and Django checks are happy.”
+- “Before I commit these `optimo_*` changes, run
+  `/backend-atomic-commit:atomic-commit --auto` to:
+  - enforce structured logging with `TypedDict` payloads,
+  - ensure no PII in logs,
+  - verify tests and `.security/*` scripts,
+  and then tell me whether the commit is ready and what the commit message
+  should be.”
+
 If you’re not in a backend repo (no `manage.py`, no backend-style `AGENTS.md`,
 no `.pre-commit-config.yaml`), this Skill should say so explicitly and fall
 back to a lighter “generic Python pre-commit” behavior.
@@ -419,4 +444,3 @@ Output shape for both modes:
 Be direct, specific, and actionable in each bullet, pointing to file/area and
 suggesting concrete corrections. Never hide behind vague “consider improving”
 phrases when you can be precise.
-
