@@ -53,6 +53,14 @@ When working in this repo, Claude Code should:
      - For new plugins, start at `0.1.0` (or similar) and add a matching entry
        in `marketplace.json`.
 
+   - **CLAUDE.md best practice:** Follow Claude Code’s guidance for web-based
+     repos (see
+     `https://docs.claude.com/en/docs/claude-code/claude-code-on-the-web#best-practices`):
+     - Keep requirements and commands defined in a single source of truth
+       (`AGENTS.md` in this repo).
+     - In `CLAUDE.md`, **source** this file using `@AGENTS.md` instead of
+       duplicating content, and only add minimal extra notes if truly needed.
+
 3. **Keep Skills self‑contained and documented.**
    - Each Skill should live at `plugins/<plugin-name>/skills/<skill-name>/SKILL.md`.
    - SKILL docs should explain:
@@ -73,7 +81,11 @@ When working in this repo, Claude Code should:
    - If a plugin needs to describe behavior in another repo, document it here but
      change the actual code in that other repo.
 
-## Usage Notes for Humans
+## Requirements & Commands
+
+- Dependencies:
+  - Claude Code installed locally.
+  - This repo (`claude-plugins`) cloned on your machine.
 
 - Once this repo is hosted at `github.com/DiversioTeam/claude-plugins`, add the
   marketplace to Claude Code from any project:
@@ -82,14 +94,32 @@ When working in this repo, Claude Code should:
   /plugin marketplace add DiversioTeam/claude-plugins
   ```
 
-- Then install the Monty backend code review plugin from this marketplace:
+- Install the Monty backend code review plugin:
 
   ```bash
   /plugin install monty-code-review@diversiotech
   ```
 
-After installation, you can use the `monty-code-review` Skill from other repos to
-get hyper‑pedantic Django4Lyfe backend reviews.
+- Install the backend PR workflow plugin:
+
+  ```bash
+  /plugin install backend-pr-workflow@diversiotech
+  ```
+
+- Install the code review digest writer plugin:
+
+  ```bash
+  /plugin install code-review-digest-writer@diversiotech
+  ```
+
+## Usage Notes for Humans
+
+- After installation, you can use:
+  - `monty-code-review` for hyper‑pedantic Django4Lyfe backend reviews.
+  - `backend-pr-workflow` for backend PR workflow checks (ClickUp-linked
+    branch/PR naming, migrations, downtime-safe schema changes).
+  - `code-review-digest-writer` to generate weekly code review digests for a
+    repo based on PR review comments.
 
 ## References
 

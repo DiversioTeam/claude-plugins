@@ -2,23 +2,17 @@
 
 ---
 
-## Requirements & Commands
+## Notes
 
-- Dependencies:
-  - Claude Code installed locally.
-  - This repo (`claude-plugins`) cloned on your machine.
+This `CLAUDE.md` intentionally sources `AGENTS.md` so that requirements,
+commands, and agent behavior live in a single source of truth for this repo.
 
-- Add this marketplace to Claude Code (once this repo is hosted at GitHub):
+For Claude Code best practices on `CLAUDE.md` / `AGENTS.md` in web-based repos,
+see:
+- https://docs.claude.com/en/docs/claude-code/claude-code-on-the-web#best-practices
 
-  ```bash
-  /plugin marketplace add DiversioTeam/claude-plugins
-  ```
-
-- Install the `monty-code-review` plugin from this marketplace:
-
-  ```bash
-  /plugin install monty-code-review@diversiotech
-  ```
-
-Once installed, the `monty-code-review` Skill will be available to Claude Code in
-other projects and can be invoked for backend code review work.
+Relevant guidance (summarized):
+- Document requirements: clearly specify dependencies and commands for the
+  project.
+- If you have an `AGENTS.md` file, you can source it in your `CLAUDE.md` using
+  `@AGENTS.md` to maintain a single source of truth.
