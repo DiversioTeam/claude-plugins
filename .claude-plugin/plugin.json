@@ -1,0 +1,12 @@
+{
+  "name": "claude-plugins",
+  "version": "1.0.0",
+  "description": "Claude Code plugins repository for Diversio",
+  "author": {
+    "name": "Diversio"
+  },
+  "keywords": [
+    "claude",
+    "plugins"
+  ]
+}
