@@ -20,6 +20,12 @@ Key layout:
   - `monty-code-review/`
     - `.claude-plugin/plugin.json` – plugin manifest for `monty-code-review`.
     - `skills/monty-code-review/SKILL.md` – the Monty backend code review Skill.
+  - `backend-pr-workflow/`
+    - `.claude-plugin/plugin.json` – plugin manifest for backend PR workflow checks.
+    - `skills/backend-pr-workflow/SKILL.md` – backend PR workflow Skill.
+  - `code-review-digest-writer/`
+    - `.claude-plugin/plugin.json` – plugin manifest for code review digests.
+    - `skills/code-review-digest-writer/SKILL.md` – code review digest writer Skill.
 
 ## How Claude Code Should Behave Here
 
