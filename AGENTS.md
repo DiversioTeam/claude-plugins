@@ -1,0 +1,84 @@
+# Claude Code Configuration for `claude-plugins`
+
+This repository is a **Claude Code plugins + marketplace repo** for Diversio. It is
+used to host reusable Claude Code plugins (primarily Skills) that can be consumed
+from other projects via the plugin system.
+
+## Repository Purpose
+
+- Provide a **local / GitHub marketplace** of Diversio-maintained Claude Code plugins.
+- Encapsulate opinionated Skills (for example, the Monty backend code review Skill)
+  so they can be reused across multiple repos without copy‑pasting.
+- Keep plugin manifests, marketplace definitions, and SKILL docs small, clear, and
+  versioned.
+
+Key layout:
+
+- `.claude-plugin/`
+  - `marketplace.json` – marketplace definition listing available plugins.
+- `plugins/`
+  - `monty-code-review/`
+    - `.claude-plugin/plugin.json` – plugin manifest for `monty-code-review`.
+    - `skills/monty-code-review/SKILL.md` – the Monty backend code review Skill.
+
+## How Claude Code Should Behave Here
+
+When working in this repo, Claude Code should:
+
+1. **Treat this as configuration, not application code.**
+   - Do **not** scaffold apps, frameworks, or unrelated code here.
+   - Limit changes to:
+     - `AGENTS.md`, `CLAUDE.md`
+     - `.claude-plugin/*.json` (marketplace + repo metadata)
+     - `plugins/**/.claude-plugin/plugin.json` (per-plugin manifests)
+     - `plugins/**/skills/*/SKILL.md` (skill docs)
+     - `README.md` / documentation.
+
+2. **Keep JSON valid and minimal.**
+   - Always keep `marketplace.json` and each `plugin.json` valid JSON.
+   - Prefer small, targeted edits over whole‑file rewrites.
+   - If making non‑trivial changes, mentally (or programmatically) validate JSON.
+
+3. **Keep Skills self‑contained and documented.**
+   - Each Skill should live at `plugins/<plugin-name>/skills/<skill-name>/SKILL.md`.
+   - SKILL docs should explain:
+     - When to use the Skill.
+     - Core priorities / taste.
+     - Output shape and severity tags.
+   - Avoid including secrets or customer‑specific confidential details in SKILL docs.
+
+4. **Follow existing naming and structure.**
+   - New plugins should mirror the structure of `monty-code-review`:
+     - `plugins/<plugin>/`
+       - `.claude-plugin/plugin.json`
+       - `skills/<skill-name>/SKILL.md`
+   - Use `kebab-case` for plugin folder names where possible.
+
+5. **Do not modify application behavior here.**
+   - This repo should not contain Django/React/Terraform or other app logic.
+   - If a plugin needs to describe behavior in another repo, document it here but
+     change the actual code in that other repo.
+
+## Usage Notes for Humans
+
+- Once this repo is hosted at `github.com/DiversioTeam/claude-plugins`, add the
+  marketplace to Claude Code from any project:
+
+  ```bash
+  /plugin marketplace add DiversioTeam/claude-plugins
+  ```
+
+- Then install the Monty backend code review plugin from this marketplace:
+
+  ```bash
+  /plugin install monty-code-review@diversiotech
+  ```
+
+After installation, you can use the `monty-code-review` Skill from other repos to
+get hyper‑pedantic Django4Lyfe backend reviews.
+
+## References
+
+- [Claude Code Plugins](https://code.claude.com/docs/en/plugins)
+- [Plugin Marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
+- [Agent Skills](https://code.claude.com/docs/en/skills)
