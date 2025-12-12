@@ -373,11 +373,37 @@ When commenting on code, pay particular attention to:
     centralize them in shared fixtures or factories.
   - Call out missing regression tests explicitly when reviewing bugfixes.
 - Tooling & search:
-  - Aim for “ruff-clean” code by default; do not introduce new lint violations, and
+  - Aim for "ruff-clean" code by default; do not introduce new lint violations, and
     remove existing ones when practical.
   - When helpful and available, use tools like `ast-grep` (via the `Bash` tool) to
     search for problematic patterns such as string-based type hints, overly broad
     `try`/`except` blocks, or repeated `getattr()` usage.
+
+## SOLID Principles
+
+When reviewing code, check for SOLID principle violations. If you identify any of the
+following patterns, load `SOLID_principles.md` from this skill directory for detailed
+guidance, code examples, and anti-patterns.
+
+Flag these during review:
+- **Dependency Inversion (DIP):** Tasks or services that directly instantiate concrete
+  clients/services instead of accepting injectable factories. Look for tight coupling
+  that makes testing require deep `@patch` calls.
+- **Single Responsibility (SRP):** Functions or classes with multiple "reasons to change"
+  — e.g., a single function that queries, formats, sends emails, and persists. Boundaries
+  should be thin; services should be focused.
+- **Open/Closed (OCP):** Repeated `if platform == "slack" / elif platform == "teams"`
+  branching across multiple files. Suggest registry + Protocol patterns to make code
+  extensible without modification.
+- **Liskov Substitution (LSP):** Mocks that return richer shapes than prod, subclasses
+  that raise different exceptions, or implementations that don't conform to the same
+  contract. Flag mock/prod divergence that causes "tests pass, prod breaks".
+- **Interface Segregation (ISP):** Consumers depending on large interfaces but only
+  using 1–2 methods. If a test fake requires implementing many unused methods, the
+  interface is too wide.
+
+Use `SOLID_principles.md` to cite specific patterns, anti-patterns, and review checklists
+when calling out violations.
 
 ## Examples
 
