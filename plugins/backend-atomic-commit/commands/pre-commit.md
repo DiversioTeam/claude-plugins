@@ -10,7 +10,7 @@ Focus on:
   `.pre-commit-config.yaml`, `.security/*` helpers, and Monty’s backend taste.
 - Eliminating local imports, debug statements, PII-in-logs issues, and obvious
   type-hint problems.
-- Making sure Ruff, djlint, mypy, Django system checks, and pre-commit hooks
+- Making sure Ruff, djlint, ty, Django system checks, and pre-commit hooks
   are all happy for the current changes.
 
 Do **not** propose a commit message in this mode; just leave the working tree
