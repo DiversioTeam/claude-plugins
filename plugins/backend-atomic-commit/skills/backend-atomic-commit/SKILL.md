@@ -41,14 +41,14 @@ backend) when you want:
   `[BLOCKING]`.”
 - “Use `/backend-atomic-commit:atomic-commit` to prepare an atomic commit for
   the staged changes in `backend/`. Enforce all pre-commit hooks and
-  `.security` scripts, run Ruff, mypy, Django checks, and relevant pytest
+  `.security` scripts, run Ruff, ty, Django checks, and relevant pytest
   subsets, then propose a ticket-prefixed commit message with **no AI
   signature** and clearly mark any `[BLOCKING]` issues.”
 - “Treat my current backend changes as one logical bugfix and run
   `/backend-atomic-commit:pre-commit` in a strict mode: eliminate local
   imports, fix type hints (no `Any`, no string-based annotations), clean up
   debug statements, and ensure Ruff, `.security/local_imports_pr_diff.sh`,
-  mypy, and Django checks are happy.”
+  ty, and Django checks are happy."
 - “Before I commit these `optimo_*` changes, run
   `/backend-atomic-commit:atomic-commit --auto` to:
   - enforce structured logging with `TypedDict` payloads,
@@ -121,7 +121,7 @@ When this Skill runs, you should first gather context using `Bash`, `Read`,
   - Detect `manage.py` / Django project layout.
 - Tool availability:
   - `uv` and `.bin/` wrappers:
-    - `.bin/ruff`, `.bin/mypy`, `.bin/django`, `.bin/pytest`.
+    - `.bin/ruff`, `.bin/ty`, `.bin/django`, `.bin/pytest`.
   - Fallback to `uv run` or plain `python` / `pytest` / `ruff` where necessary.
 
 If the repo clearly isn’t the Diversio backend / Django4Lyfe style, say so and
@@ -161,7 +161,7 @@ In **both** `pre-commit` and `atomic-commit` modes, follow this pipeline:
      `atomic-commit`.
 
 4. **Type/system checks**
-   - Run `.bin/mypy` or `./mypy_checks.py` for type checking (respecting any
+   - Run `.bin/ty` or `./ty_checks.py` for type checking (respecting any
      documented baseline, but treating **new** issues seriously).
    - Run `.bin/django check` or equivalent:
      - `uv run python manage.py check --fail-level WARNING`.
@@ -349,7 +349,7 @@ you must be **very strict**:
      - `./.security/ruff_pr_diff.sh`
      - `./.security/local_imports_pr_diff.sh`
      - `.bin/ruff` / `ruff format`
-     - `.bin/mypy` / `./mypy_checks.py`
+     - `.bin/ty` / `./ty_checks.py`
      - `.bin/django check` / `manage.py check`
      - Relevant `pytest` subsets for risky changes
      - Pre-commit hooks defined in `.pre-commit-config.yaml`
@@ -401,7 +401,7 @@ In `pre-commit` mode (invoked via `/backend-atomic-commit:pre-commit`):
   - Formatting, linting, local imports, obvious type hints, logging patterns,
     removal of debug code, and consistent fixtures.
 - You must:
-  - Run the same gates described above (Ruff, `.security/*`, mypy, Django
+  - Run the same gates described above (Ruff, `.security/*`, ty, Django
     checks, tests as appropriate).
   - Re-run or re-stage files modified by tools or hooks.
 - You do **not** propose a commit or check atomicity.
