@@ -1,9 +1,9 @@
-# Contributing to `claude-plugins`
+# Contributing to `agent-skills-marketplace`
 
-This repo is a **Claude Code plugins + marketplace** for Diversio. It is mostly
+This repo is an **Agent Skills marketplace** for Diversio. It is mostly
 configuration, Skills, and commands – not application code. The goal is to make
-it easy to add and evolve plugins using LLMs while keeping things consistent and
-safe.
+it easy to add and evolve Skills and plugin metadata using LLMs while keeping
+things consistent and safe.
 
 If in doubt, treat `AGENTS.md` as the source of truth and follow it first.
 
@@ -182,4 +182,3 @@ check:
 Following these guidelines should keep new plugins easy to add, easy to review,
 and consistent with the rest of the marketplace. Feel free to evolve this
 document as we learn what patterns work best.
-

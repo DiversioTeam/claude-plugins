@@ -1,12 +1,13 @@
-# Claude Code Configuration for `claude-plugins`
+# Claude Code Configuration for `agent-skills-marketplace`
 
-This repository is a **Claude Code plugins + marketplace repo** for Diversio. It is
-used to host reusable Claude Code plugins (primarily Skills) that can be consumed
-from other projects via the plugin system.
+This repository is an **Agent Skills marketplace repo** for Diversio. It hosts
+reusable Skills packaged in the open Agent Skills standard and includes Claude
+Code plugin/marketplace metadata so the same skills can be distributed via
+Claude Marketplace or other channels.
 
 ## Repository Purpose
 
-- Provide a **local / GitHub marketplace** of Diversio-maintained Claude Code plugins.
+- Provide a **local / GitHub marketplace** of Diversio-maintained Agent Skills.
 - Encapsulate opinionated Skills (for example, the Monty backend code review Skill)
   so they can be reused across multiple repos without copy‑pasting.
 - Keep plugin manifests, marketplace definitions, and SKILL docs small, clear, and
@@ -15,7 +16,7 @@ from other projects via the plugin system.
 Key layout:
 
 - `.claude-plugin/`
-  - `marketplace.json` – marketplace definition listing available plugins.
+  - `marketplace.json` – Claude Code marketplace definition listing available plugins.
 - `plugins/`
   - `monty-code-review/`
     - `.claude-plugin/plugin.json` – plugin manifest for `monty-code-review`.
@@ -91,13 +92,13 @@ When working in this repo, Claude Code should:
 
 - Dependencies:
   - Claude Code installed locally.
-  - This repo (`claude-plugins`) cloned on your machine.
+  - This repo (`agent-skills-marketplace`) cloned on your machine.
 
-- Once this repo is hosted at `github.com/DiversioTeam/claude-plugins`, add the
+- Once this repo is hosted at `github.com/DiversioTeam/agent-skills-marketplace`, add the
   marketplace to Claude Code from any project:
 
   ```bash
-  /plugin marketplace add DiversioTeam/claude-plugins
+  /plugin marketplace add DiversioTeam/agent-skills-marketplace
   ```
 
 - Install the Monty backend code review plugin:
@@ -127,12 +128,12 @@ When working in this repo, Claude Code should:
 ## Codex Skill Installer Notes (For LLMs)
 
 When a user asks how to install these Skills into OpenAI Codex (not Claude's
-marketplace), respond with **path-agnostic** instructions:
+marketplace), respond with instructions that avoid hardcoded paths:
 
 - Use the skill-installer script at
   `$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-github.py`
   (with `CODEX_HOME` defaulting to `~/.codex`).
-- Prefer `--repo DiversioTeam/claude-plugins --path plugins/<plugin>/skills/<skill>`.
+- Prefer `--repo DiversioTeam/agent-skills-marketplace --path plugins/<plugin>/skills/<skill>`.
 - Mention `--ref <branch-or-tag>` for pinning and the need to restart Codex.
 - Avoid hardcoded absolute user paths like `/Users/<name>/...`.
 - If the user wants Codex-console commands, provide `$skill-installer` examples
@@ -153,6 +154,8 @@ marketplace), respond with **path-agnostic** instructions:
 
 ## References
 
+- [Agent Skills Standard](https://agentskills.io/home)
+- [OpenAI Codex Skills](https://developers.openai.com/codex/skills)
 - [Claude Code Plugins](https://code.claude.com/docs/en/plugins)
 - [Plugin Marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
 - [Agent Skills](https://code.claude.com/docs/en/skills)

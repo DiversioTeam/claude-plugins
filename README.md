@@ -1,15 +1,46 @@
-# claude-plugins
+# agent-skills-marketplace
 
-Claude Code plugins marketplace for Diversio.
+Agent Skills marketplace for Diversio.
+
+## Agent Skills Standard
+
+This repo follows the [Agent Skills standard](https://agentskills.io/home): an
+open, tool-agnostic format for packaging capabilities and workflows for agents.
+A skill is a directory with a required `SKILL.md` that contains YAML frontmatter
+(`name`, `description`) and Markdown instructions, plus optional `scripts/`,
+`references/`, and `assets/`.
+
+Key points from the standard:
+- `SKILL.md` is required and starts with YAML frontmatter.
+- `name` must match the skill directory and use lowercase letters, numbers, and hyphens.
+- `description` should explain what the skill does and when to use it.
+- Optional frontmatter fields include `license`, `compatibility`, `metadata`, and experimental `allowed-tools`.
+- Keep `SKILL.md` focused; link to longer guidance in `references/` or helpers in `scripts/`.
+
+Skills are designed for progressive disclosure: agents read metadata first,
+load the full `SKILL.md` when invoked, and open `references/` or `scripts/`
+only if needed.
+
+## Working on Skills (LLM checklist)
+
+- Start with `AGENTS.md` (source of truth); `CLAUDE.md` only includes it.
+- Required structure: `skills/<skill-name>/SKILL.md` with YAML frontmatter (`name`, `description`).
+- Ensure the skill directory name matches `name` and stays in kebab-case.
+- Add or update a corresponding `plugins/<plugin>/commands/*.md` entrypoint.
+- Keep `SKILL.md` focused; put deep docs in `references/` and helpers in `scripts/`.
+- If you change a plugin, bump its version in `plugins/<plugin>/.claude-plugin/plugin.json`
+  and keep `.claude-plugin/marketplace.json` in sync.
 
 ## Overview
 
-This repository is a Claude Code marketplace that hosts reusable plugins (primarily Skills) maintained by the Diversio team.
+This repository hosts Diversio-maintained Agent Skills and plugin manifests so
+the same skills can be distributed via the Claude Code marketplace or other
+channels.
 
 ## Repository Structure
 
 ```
-claude-plugins/
+agent-skills-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json               # Marketplace definition
 ├── plugins/
@@ -65,7 +96,7 @@ claude-plugins/
 1. Add the marketplace to Claude Code:
 
    ```bash
-   /plugin marketplace add DiversioTeam/claude-plugins
+   /plugin marketplace add DiversioTeam/agent-skills-marketplace
    ```
 
 2. Install a plugin from the marketplace:
@@ -94,7 +125,7 @@ claude-plugins/
    /code-review-digest-writer:review-digest  # Generate a code review digest
    ```
 
-## Install As Codex Skills (Path-Agnostic)
+## Install As Codex Skills
 
 Codex can install these Skills directly from GitHub (separate from Claude's
 marketplace). Use the skill-installer script and avoid hardcoded user paths:
@@ -103,14 +134,14 @@ marketplace). Use the skill-installer script and avoid hardcoded user paths:
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 
 python "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
-  --repo DiversioTeam/claude-plugins \
+  --repo DiversioTeam/agent-skills-marketplace \
   --path plugins/monty-code-review/skills/monty-code-review
 ```
 
 You can also invoke the installer from the Codex console:
 
 ```text
-$skill-installer install from github repo=DiversioTeam/claude-plugins path=plugins/monty-code-review/skills/monty-code-review
+$skill-installer install from github repo=DiversioTeam/agent-skills-marketplace path=plugins/monty-code-review/skills/monty-code-review
 ```
 
 Install multiple Skills in one run:
@@ -119,7 +150,7 @@ Install multiple Skills in one run:
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 
 python "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
-  --repo DiversioTeam/claude-plugins \
+  --repo DiversioTeam/agent-skills-marketplace \
   --path plugins/monty-code-review/skills/monty-code-review \
   --path plugins/backend-atomic-commit/skills/backend-atomic-commit \
   --path plugins/backend-pr-workflow/skills/backend-pr-workflow \
@@ -129,7 +160,7 @@ python "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-gi
 Codex console multi-install example:
 
 ```text
-$skill-installer install from github repo=DiversioTeam/claude-plugins \
+$skill-installer install from github repo=DiversioTeam/agent-skills-marketplace \
   path=plugins/monty-code-review/skills/monty-code-review \
   path=plugins/backend-atomic-commit/skills/backend-atomic-commit \
   path=plugins/backend-pr-workflow/skills/backend-pr-workflow \
@@ -143,6 +174,8 @@ Notes:
 
 ## Documentation
 
+- [Agent Skills Standard](https://agentskills.io/home)
+- [OpenAI Codex Skills](https://developers.openai.com/codex/skills)
 - [Claude Code Plugins](https://code.claude.com/docs/en/plugins)
 - [Plugin Marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
 - [Agent Skills](https://code.claude.com/docs/en/skills)
