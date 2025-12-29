@@ -33,6 +33,9 @@ Key layout:
   - `code-review-digest-writer/`
     - `.claude-plugin/plugin.json` – plugin manifest for code review digests.
     - `skills/code-review-digest-writer/SKILL.md` – code review digest writer Skill.
+  - `plan-directory/`
+    - `.claude-plugin/plugin.json` – plugin manifest for structured plan directories.
+    - `skills/plan-directory/SKILL.md` – plan directory creation and maintenance Skill.
 
 ## How Claude Code Should Behave Here
 
@@ -137,6 +140,12 @@ When working in this repo, Claude Code should:
   /plugin install code-review-digest-writer@diversiotech
   ```
 
+- Install the plan directory plugin:
+
+  ```bash
+  /plugin install plan-directory@diversiotech
+  ```
+
 ## Codex Skill Installer Notes (For LLMs)
 
 When a user asks how to install these Skills into OpenAI Codex (not Claude's
@@ -155,7 +164,7 @@ marketplace), respond with instructions that avoid hardcoded paths:
 
 - After installation, you can use:
   - `monty-code-review` for hyper‑pedantic Django4Lyfe backend reviews.
-   - `backend-atomic-commit` for backend pre-commit fixes and strict atomic
+  - `backend-atomic-commit` for backend pre-commit fixes and strict atomic
      commits that obey local `AGENTS.md`, `.pre-commit-config.yaml`,
      `.security/*` helpers, and Monty’s backend taste (no AI commit
      signatures).
@@ -165,6 +174,9 @@ marketplace), respond with instructions that avoid hardcoded paths:
     files by tracing the corresponding Django4Lyfe implementation.
   - `code-review-digest-writer` to generate weekly code review digests for a
     repo based on PR review comments.
+  - `plan-directory` to create and maintain structured plan directories with
+    a master PLAN.md index and numbered task files (001-*.md) containing
+    checklists, tests, and completion criteria.
 
 ## References
 

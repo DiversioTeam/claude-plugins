@@ -1,0 +1,8 @@
+{
+  "name": "plan-directory",
+  "version": "0.1.0",
+  "description": "Create and maintain structured plan directories with a master PLAN.md index and numbered task files (001-*.md) containing checklists, tests, and completion criteria.",
+  "author": {
+    "name": "Diversio Devs"
+  }
+}

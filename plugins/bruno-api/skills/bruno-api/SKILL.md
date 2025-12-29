@@ -155,3 +155,16 @@ Rules:
     - Write a single combined doc (with a clear table of contents), OR
     - Write multiple files under an output directory (ask the user which they want).
 
+## Compatibility Notes
+
+This skill is designed to work with both **Claude Code** and **OpenAI Codex**.
+
+For Codex users:
+- Install via skill-installer with `--repo DiversioTeam/agent-skills-marketplace
+  --path plugins/bruno-api/skills/bruno-api`.
+- Use `$skill bruno-api` to invoke.
+
+For Claude Code users:
+- Install via `/plugin install bruno-api@diversiotech`.
+- Use `/bruno-api:docs` to invoke.
+

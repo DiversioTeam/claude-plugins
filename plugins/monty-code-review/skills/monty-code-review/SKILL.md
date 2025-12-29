@@ -431,8 +431,21 @@ when calling out violations.
   “Use your `monty-code-review` skill to skim this PR and only flag blocking or should-fix issues; skip most nits.”
 - **Also acceptable shorthand**:  
   “Review this Django PR like Monty would, but only call out blocking or should-fix issues; skip the tiny nits.”
-- **Expected behavior**:  
-  - Follow the same workflow and priorities, but:  
-    - Only emit `[BLOCKING]` and `[SHOULD_FIX]` items unless a nit is truly important to mention.  
-    - In the intro or verdict, state that you intentionally suppressed most `[NIT]` items due to the requested lighter review.  
-  - The structure (`What’s great`, `What could be improved`, `Tests`, `Verdict`) stays the same; the difference is primarily in strictness and number of nits.
+- **Expected behavior**:
+  - Follow the same workflow and priorities, but:
+    - Only emit `[BLOCKING]` and `[SHOULD_FIX]` items unless a nit is truly important to mention.
+    - In the intro or verdict, state that you intentionally suppressed most `[NIT]` items due to the requested lighter review.
+  - The structure (`What's great`, `What could be improved`, `Tests`, `Verdict`) stays the same; the difference is primarily in strictness and number of nits.
+
+## Compatibility Notes
+
+This skill is designed to work with both **Claude Code** and **OpenAI Codex**.
+
+For Codex users:
+- Install via skill-installer with `--repo DiversioTeam/agent-skills-marketplace
+  --path plugins/monty-code-review/skills/monty-code-review`.
+- Use `$skill monty-code-review` to invoke.
+
+For Claude Code users:
+- Install via `/plugin install monty-code-review@diversiotech`.
+- Use `/monty-code-review:code-review` to invoke.
