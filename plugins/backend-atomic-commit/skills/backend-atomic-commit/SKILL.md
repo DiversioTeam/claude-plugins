@@ -442,5 +442,18 @@ Output shape for both modes:
   - `Proposed commit` (only in atomic-commit mode)
 
 Be direct, specific, and actionable in each bullet, pointing to file/area and
-suggesting concrete corrections. Never hide behind vague “consider improving”
+suggesting concrete corrections. Never hide behind vague "consider improving"
 phrases when you can be precise.
+
+## Compatibility Notes
+
+This skill is designed to work with both **Claude Code** and **OpenAI Codex**.
+
+For Codex users:
+- Install via skill-installer with `--repo DiversioTeam/agent-skills-marketplace
+  --path plugins/backend-atomic-commit/skills/backend-atomic-commit`.
+- Use `$skill backend-atomic-commit` to invoke.
+
+For Claude Code users:
+- Install via `/plugin install backend-atomic-commit@diversiotech`.
+- Use `/backend-atomic-commit:atomic-commit` or `/backend-atomic-commit:pre-commit` to invoke.

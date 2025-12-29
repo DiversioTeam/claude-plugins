@@ -416,3 +416,16 @@ When invoked, this Skill should:
      requirements, not nice-to-haves.
    - Always provide specific, actionable corrections rather than vague
      guidance.
+
+## Compatibility Notes
+
+This skill is designed to work with both **Claude Code** and **OpenAI Codex**.
+
+For Codex users:
+- Install via skill-installer with `--repo DiversioTeam/agent-skills-marketplace
+  --path plugins/backend-pr-workflow/skills/backend-pr-workflow`.
+- Use `$skill backend-pr-workflow` to invoke.
+
+For Claude Code users:
+- Install via `/plugin install backend-pr-workflow@diversiotech`.
+- Use `/backend-pr-workflow:check-pr` to invoke.

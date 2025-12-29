@@ -62,6 +62,17 @@
       "source": "./plugins/bruno-api",
       "category": "documentation",
       "keywords": ["django", "api", "docs", "bruno", "drf", "ninja", "diversio"]
+    },
+    {
+      "name": "plan-directory",
+      "description": "Create and maintain structured plan directories with a master PLAN.md index and numbered task files (001-*.md) containing checklists, tests, and completion criteria.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Diversio Devs"
+      },
+      "source": "./plugins/plan-directory",
+      "category": "process",
+      "keywords": ["planning", "project-management", "markdown", "checklists", "task-tracking"]
     }
   ]
 }

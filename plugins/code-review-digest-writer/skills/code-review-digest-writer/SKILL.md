@@ -197,3 +197,16 @@ Instead of issue severities, this Skill uses **learning/emphasis tags**:
 
 Use these tags sparingly and consistently; they should help readers prioritize
 which lessons to internalize first.
+
+## Compatibility Notes
+
+This skill is designed to work with both **Claude Code** and **OpenAI Codex**.
+
+For Codex users:
+- Install via skill-installer with `--repo DiversioTeam/agent-skills-marketplace
+  --path plugins/code-review-digest-writer/skills/code-review-digest-writer`.
+- Use `$skill code-review-digest-writer` to invoke.
+
+For Claude Code users:
+- Install via `/plugin install code-review-digest-writer@diversiotech`.
+- Use `/code-review-digest-writer:review-digest` to invoke.
