@@ -73,6 +73,17 @@
       "source": "./plugins/plan-directory",
       "category": "process",
       "keywords": ["planning", "project-management", "markdown", "checklists", "task-tracking"]
+    },
+    {
+      "name": "pr-description-writer",
+      "description": "Generates comprehensive, reviewer-friendly PR descriptions with visual diagrams, summary tables, and structured sections.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Diversio Devs"
+      },
+      "source": "./plugins/pr-description-writer",
+      "category": "documentation",
+      "keywords": ["github", "pull-request", "documentation", "workflow", "diversio"]
     }
   ]
 }
