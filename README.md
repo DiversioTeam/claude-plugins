@@ -69,14 +69,22 @@ agent-skills-marketplace/
 │   │   └── commands/
 │   │       ├── pre-commit.md
 │   │       └── atomic-commit.md
-│   └── code-review-digest-writer/     # Code review digest generator
+│   ├── code-review-digest-writer/     # Code review digest generator
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   ├── skills/
+│   │   │   └── code-review-digest-writer/
+│   │   │       └── SKILL.md
+│   │   └── commands/
+│   │       └── review-digest.md       # Slash command entrypoint
+│   └── pr-description-writer/         # PR description generator
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       ├── skills/
-│       │   └── code-review-digest-writer/
+│       │   └── pr-description-writer/
 │       │       └── SKILL.md
 │       └── commands/
-│           └── review-digest.md       # Slash command entrypoint
+│           └── write-pr.md            # Slash command entrypoint
 ├── README.md
 ├── CONTRIBUTING.md
 └── LICENSE
@@ -87,10 +95,11 @@ agent-skills-marketplace/
 | Plugin | Description |
 |--------|-------------|
 | `monty-code-review` | Hyper-pedantic Django4Lyfe backend code review Skill |
-| `backend-atomic-commit` | Backend pre-commit / atomic-commit Skill that enforces AGENTS.md, pre-commit hooks, .security helpers, and Monty’s backend taste (no AI commit signatures) |
+| `backend-atomic-commit` | Backend pre-commit / atomic-commit Skill that enforces AGENTS.md, pre-commit hooks, .security helpers, and Monty's backend taste (no AI commit signatures) |
 | `backend-pr-workflow` | Backend PR workflow Skill that enforces ClickUp-linked branch/PR naming, safe migrations, and downtime-safe schema changes |
 | `bruno-api` | API endpoint documentation generator from Bruno (`.bru`) files that traces Django4Lyfe implementations (DRF/Django Ninja) |
 | `code-review-digest-writer` | Weekly code-review digest writer Skill (repo-agnostic) |
+| `pr-description-writer` | Generates comprehensive, reviewer-friendly PR descriptions with visual diagrams, summary tables, and structured sections |
 
 ## Installation
 
@@ -117,6 +126,9 @@ agent-skills-marketplace/
 
    # Code review digest writer
    /plugin install code-review-digest-writer@diversiotech
+
+   # PR description writer
+   /plugin install pr-description-writer@diversiotech
    ```
 
 3. Use plugin-provided slash commands (once plugins are installed):
@@ -128,6 +140,7 @@ agent-skills-marketplace/
    /backend-pr-workflow:check-pr           # Backend PR workflow & migrations check
    /bruno-api:docs                         # Generate endpoint docs from Bruno (.bru) files
    /code-review-digest-writer:review-digest  # Generate a code review digest
+   /pr-description-writer:write-pr          # Generate a comprehensive PR description
    ```
 
 ## Install As Codex Skills
@@ -159,7 +172,8 @@ python "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-gi
   --path plugins/monty-code-review/skills/monty-code-review \
   --path plugins/backend-atomic-commit/skills/backend-atomic-commit \
   --path plugins/backend-pr-workflow/skills/backend-pr-workflow \
-  --path plugins/code-review-digest-writer/skills/code-review-digest-writer
+  --path plugins/code-review-digest-writer/skills/code-review-digest-writer \
+  --path plugins/pr-description-writer/skills/pr-description-writer
 ```
 
 Codex console multi-install example:
@@ -169,7 +183,8 @@ $skill-installer install from github repo=DiversioTeam/agent-skills-marketplace 
   path=plugins/monty-code-review/skills/monty-code-review \
   path=plugins/backend-atomic-commit/skills/backend-atomic-commit \
   path=plugins/backend-pr-workflow/skills/backend-pr-workflow \
-  path=plugins/code-review-digest-writer/skills/code-review-digest-writer
+  path=plugins/code-review-digest-writer/skills/code-review-digest-writer \
+  path=plugins/pr-description-writer/skills/pr-description-writer
 ```
 
 Notes:
