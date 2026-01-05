@@ -62,12 +62,12 @@ theme preferences, and locale options.
 
 ## Task Completion Tracker
 
-| Task | Status | Lint | Types | Tests | Coverage | Regression | Committed |
-|------|--------|------|-------|-------|----------|------------|-----------|
-| 001 - Model | `in-progress` | | | | | | |
-| 002 - Service | | | | | | | |
-| 003 - API | | | | | | | |
-| 004 - Cache | | | | | | | |
+| Task | Status | Lint | Types | Tests | Coverage | Regression |
+|------|--------|------|-------|-------|----------|------------|
+| 001 - Model | `in-progress` | | | | | |
+| 002 - Service | | | | | | |
+| 003 - API | | | | | | |
+| 004 - Cache | | | | | | |
 
 ## Quality Gates
 
@@ -95,8 +95,7 @@ theme preferences, and locale options.
 - [ ] `.bin/django check` → no issues
 
 **Code Quality:**
-- [ ] `grep -r "TODO\|FIXME" accounts/preferences/` → no matches
-- [ ] `grep -r "noqa\|type: ignore" accounts/preferences/` → no matches
+- [ ] `! grep -rE "TODO|FIXME|XXX|HACK|noqa|type: ignore" accounts/preferences/` → no matches
 
 ## Follow-ups (Not in Scope)
 

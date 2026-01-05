@@ -167,8 +167,8 @@ Run after each task completion:
   --cov={{APP_PATH}}{{MODULE_PATH}} --cov-report=term-missing
 
 # 7. Shortcut check
-grep -r "TODO\|FIXME\|XXX\|HACK\|noqa\|type: ignore" {{APP_PATH}}{{MODULE_PATH}} \
-  || echo "No shortcuts found"
+grep -rE "TODO|FIXME|XXX|HACK|noqa|type: ignore" {{APP_PATH}}{{MODULE_PATH}} \
+  && echo "❌ Found shortcuts" || echo "✓ Clean"
 
 # 8. Acceptance criteria
 # Manual: verify all checkboxes in task file are checked

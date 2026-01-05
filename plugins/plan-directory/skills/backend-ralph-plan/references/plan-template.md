@@ -97,10 +97,7 @@ Run when all tasks are complete:
 - [ ] `{{DJANGO_CMD}} migrate --check` → no pending migrations
 
 **Code Quality:**
-- [ ] `grep -r "TODO" {{APP_PATH}}{{MODULE_PATH}}` → no matches
-- [ ] `grep -r "FIXME" {{APP_PATH}}{{MODULE_PATH}}` → no matches
-- [ ] `grep -r "noqa" {{APP_PATH}}{{MODULE_PATH}}` → no matches
-- [ ] `grep -r "type: ignore" {{APP_PATH}}{{MODULE_PATH}}` → no matches
+- [ ] `! grep -rE "TODO|FIXME|XXX|HACK|noqa|type: ignore" {{APP_PATH}}{{MODULE_PATH}}` → no matches
 
 **Documentation:**
 - [ ] All public functions have docstrings

@@ -85,7 +85,7 @@ After implementing, run ALL verification steps:
 # ❌ STOP if coverage < {{COVERAGE_TARGET}}%
 
 # 7. No shortcuts
-grep -r "TODO\|FIXME\|XXX\|HACK\|noqa\|type: ignore" {{APP_PATH}}{{MODULE_PATH}} \
+grep -rE "TODO|FIXME|XXX|HACK|noqa|type: ignore" {{APP_PATH}}{{MODULE_PATH}} \
   && echo "❌ Found shortcuts - remove them" || echo "✓ Clean"
 ```
 
@@ -172,8 +172,8 @@ grep -c "completed" PLAN.md  # Should be {{TASK_COUNT}}
 {{DJANGO_CMD}} migrate --check
 
 # Zero shortcuts
-grep -r "TODO\|FIXME\|noqa\|type: ignore" {{APP_PATH}}{{MODULE_PATH}}
-# ↑ Must return no matches
+! grep -rE "TODO|FIXME|XXX|HACK|noqa|type: ignore" {{APP_PATH}}{{MODULE_PATH}}
+# ↑ Must return 0 (no matches found)
 ```
 
 ### Signal Completion

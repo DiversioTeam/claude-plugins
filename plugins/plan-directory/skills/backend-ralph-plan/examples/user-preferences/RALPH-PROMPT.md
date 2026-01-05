@@ -72,7 +72,8 @@ Run the verification checklist:
   --cov=accounts/preferences/ --cov-report=term-missing
 
 # 7. No shortcuts
-grep -r "TODO\|FIXME\|noqa\|type: ignore" accounts/preferences/ || echo "Clean"
+grep -rE "TODO|FIXME|XXX|HACK|noqa|type: ignore" accounts/preferences/ \
+  && echo "❌ Found shortcuts - remove them" || echo "✓ Clean"
 ```
 
 **If ANY check fails:** Fix it before proceeding. Do not skip.
@@ -133,7 +134,7 @@ grep "completed" PLAN.md | wc -l  # Should be 4
 .bin/django check
 
 # No shortcuts?
-grep -r "TODO\|FIXME\|noqa" accounts/preferences/  # Should be empty
+! grep -rE "TODO|FIXME|XXX|HACK|noqa|type: ignore" accounts/preferences/  # Should return 0 (no matches)
 ```
 
 2. Output the completion promise:
