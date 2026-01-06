@@ -77,14 +77,22 @@ agent-skills-marketplace/
 │   │   │       └── SKILL.md
 │   │   └── commands/
 │   │       └── review-digest.md       # Slash command entrypoint
-│   └── pr-description-writer/         # PR description generator
+│   ├── pr-description-writer/         # PR description generator
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   ├── skills/
+│   │   │   └── pr-description-writer/
+│   │   │       └── SKILL.md
+│   │   └── commands/
+│   │       └── write-pr.md            # Slash command entrypoint
+│   └── process-code-review/           # Code review processor (fix/skip issues)
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       ├── skills/
-│       │   └── pr-description-writer/
+│       │   └── process-code-review/
 │       │       └── SKILL.md
 │       └── commands/
-│           └── write-pr.md            # Slash command entrypoint
+│           └── process-review.md      # Slash command entrypoint
 ├── README.md
 ├── CONTRIBUTING.md
 └── LICENSE
@@ -100,6 +108,7 @@ agent-skills-marketplace/
 | `bruno-api` | API endpoint documentation generator from Bruno (`.bru`) files that traces Django4Lyfe implementations (DRF/Django Ninja) |
 | `code-review-digest-writer` | Weekly code-review digest writer Skill (repo-agnostic) |
 | `pr-description-writer` | Generates comprehensive, reviewer-friendly PR descriptions with visual diagrams, summary tables, and structured sections |
+| `process-code-review` | Process code review findings - interactively fix or skip issues from monty-code-review output with status tracking |
 
 ## Installation
 
@@ -129,6 +138,9 @@ agent-skills-marketplace/
 
    # PR description writer
    /plugin install pr-description-writer@diversiotech
+
+   # Code review processor (fix/skip issues from monty-code-review)
+   /plugin install process-code-review@diversiotech
    ```
 
 3. Use plugin-provided slash commands (once plugins are installed):
@@ -141,6 +153,7 @@ agent-skills-marketplace/
    /bruno-api:docs                         # Generate endpoint docs from Bruno (.bru) files
    /code-review-digest-writer:review-digest  # Generate a code review digest
    /pr-description-writer:write-pr          # Generate a comprehensive PR description
+   /process-code-review:process-review      # Process code review findings (fix/skip issues)
    ```
 
 ## Install As Codex Skills
@@ -173,7 +186,8 @@ python "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-gi
   --path plugins/backend-atomic-commit/skills/backend-atomic-commit \
   --path plugins/backend-pr-workflow/skills/backend-pr-workflow \
   --path plugins/code-review-digest-writer/skills/code-review-digest-writer \
-  --path plugins/pr-description-writer/skills/pr-description-writer
+  --path plugins/pr-description-writer/skills/pr-description-writer \
+  --path plugins/process-code-review/skills/process-code-review
 ```
 
 Codex console multi-install example:
@@ -184,7 +198,8 @@ $skill-installer install from github repo=DiversioTeam/agent-skills-marketplace 
   path=plugins/backend-atomic-commit/skills/backend-atomic-commit \
   path=plugins/backend-pr-workflow/skills/backend-pr-workflow \
   path=plugins/code-review-digest-writer/skills/code-review-digest-writer \
-  path=plugins/pr-description-writer/skills/pr-description-writer
+  path=plugins/pr-description-writer/skills/pr-description-writer \
+  path=plugins/process-code-review/skills/process-code-review
 ```
 
 Notes:

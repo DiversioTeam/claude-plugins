@@ -36,6 +36,9 @@ Key layout:
   - `plan-directory/`
     - `.claude-plugin/plugin.json` – plugin manifest for structured plan directories.
     - `skills/plan-directory/SKILL.md` – plan directory creation and maintenance Skill.
+  - `process-code-review/`
+    - `.claude-plugin/plugin.json` – plugin manifest for code review processor.
+    - `skills/process-code-review/SKILL.md` – process code review findings Skill.
 
 ## How Claude Code Should Behave Here
 
@@ -146,6 +149,12 @@ When working in this repo, Claude Code should:
   /plugin install plan-directory@diversiotech
   ```
 
+- Install the code review processor plugin:
+
+  ```bash
+  /plugin install process-code-review@diversiotech
+  ```
+
 ## Codex Skill Installer Notes (For LLMs)
 
 When a user asks how to install these Skills into OpenAI Codex (not Claude's
@@ -177,6 +186,8 @@ marketplace), respond with instructions that avoid hardcoded paths:
   - `plan-directory` to create and maintain structured plan directories with
     a master PLAN.md index and numbered task files (001-*.md) containing
     checklists, tests, and completion criteria.
+  - `process-code-review` to interactively process code review findings from
+    monty-code-review output - fix or skip issues with status tracking.
 
 ## References
 
