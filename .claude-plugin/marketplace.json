@@ -44,7 +44,7 @@
     {
       "name": "backend-atomic-commit",
       "description": "Pedantic backend pre-commit and atomic-commit Skill enforcing AGENTS.md, pre-commit hooks, .security/* helpers, and Monty's backend taste without AI commit signatures.",
-      "version": "0.1.3",
+      "version": "0.1.4",
       "author": {
         "name": "Diversio Devs"
       },
